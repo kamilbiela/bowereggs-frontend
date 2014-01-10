@@ -1,0 +1,23 @@
+{
+  "name": "bowereggs-frontend",
+  "version": "0.0.0",
+  "description": "bowereggs-frontend ==================",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "~0.4.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kamilbiela/bowereggs-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kamilbiela/bowereggs-frontend/issues"
+  },
+  "homepage": "https://github.com/kamilbiela/bowereggs-frontend"
+}
