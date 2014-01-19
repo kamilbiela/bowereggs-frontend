@@ -84,7 +84,7 @@
 
                 <ul class="pager">
                     <li class="previous" ng-class="{disabled: currentPage <= 1}"><a href="" ng-click="onClickPagePrev()">&larr; Prev</a></li>
-                    <li>test</li>
+                    <li>Page {{currentPage}} of {{totalPages}}</li>
                     <li class="next" ng-class="{disabled: currentPage >= totalPages}"><a href="" ng-click="onClickPageNext()">Next &rarr;</a></li>
                 </ul>
 
@@ -123,6 +123,7 @@
 
                 <ul class="pager">
                     <li class="previous" ng-class="{disabled: currentPage <= 1}"><a href="" ng-click="onClickPagePrev()">&larr; Prev</a></li>
+                    <li>Page {{currentPage}} of {{totalPages}}</li>
                     <li class="next" ng-class="{disabled: currentPage >= totalPages}"><a href="" ng-click="onClickPageNext()">Next &rarr;</a></li>
                 </ul>
             </div>
