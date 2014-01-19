@@ -1,11 +1,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <form>
+            <form name="search" ng-submit="onFormSubmit()" action="">
                 <div class="input-group input-group-lg">
-                    <input type="text" class="form-control">
+                    <input type="text" ng-model="query" class="form-control" placeholder="type query here">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Search</button>
+                        <button class="btn btn-primary" type="submit" ng-class="{disabled: showSpinner}">Search</button>
                     </span>
                 </div><!-- /input-group -->
             </form>
@@ -23,7 +23,7 @@
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" checked="checked"> Name
+                        <input type="checkbox" checked="checked" ng-model="filter.byName"> Name
                     </label>
                 </div>
             </div>
@@ -32,7 +32,7 @@
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" checked="checked"> Description
+                        <input type="checkbox" checked="checked" ng-model="filter.byDescription"> Description
                     </label>
                 </div>
             </div>
@@ -41,7 +41,7 @@
             <div class="form-group">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" checked="checked"> Keywords
+                        <input type="checkbox" checked="checked" ng-model="filter.byKeywords"> Keywords
                     </label>
                 </div>
             </div>
@@ -49,19 +49,27 @@
     </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="alert alert-info">
-                <strong>Use * to make Your search results better! I.e.</strong> <br>
-                <ul>
-                    <li>
-                        <b>angular*</b> - search package starting with "angular" string
-                    </li>
-                    <li>
-                        <b>*-ui</b> - search packages ending with "-ui" string
-                    </li>
-                    <li>
-                        <b>*icon*</b> - search packages containing "icon" string
-                    </li>
-                </ul>
+
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Important!
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <strong>Use * to make Your search results better! I.e.</strong> <br>
+                    <ul>
+                        <li>
+                            <b>angular*</b> - search package starting with "angular" string
+                        </li>
+                        <li>
+                            <b>*-ui</b> - search packages ending with "-ui" string
+                        </li>
+                        <li>
+                            <b>*icon*</b> - search packages containing "icon" string
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -71,58 +79,53 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-striped" id="searchResultsTable">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th> - </th>
-                        <th>Stars</th>
-                        <th>Forks</th>
+            
+            <div ng-if="eggs.length">
+
+                <ul class="pager">
+                    <li class="previous" ng-class="{disabled: currentPage <= 1}"><a href="" ng-click="onClickPagePrev()">&larr; Prev</a></li>
+                    <li>test</li>
+                    <li class="next" ng-class="{disabled: currentPage >= totalPages}"><a href="" ng-click="onClickPageNext()">Next &rarr;</a></li>
+                </ul>
+
+                <table class="table table-striped" id="searchResultsTable" ng-style="{opacity: (showSpinner ? 0.5 : 1)}">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th> - </th>
+                            <th>Stars</th>
+                            <th>Forks</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="egg in eggs">
+                        <td>
+                            <img ng-if="egg.owner.avatarUrl" ng-src="{{egg.owner.avatarUrl}}" style="width: 64px; height: 64px;">
+                        </td>
+                        <td>
+                            {{egg.name}}
+                        </td>
+                        <td>
+                            {{egg.description}}
+                        </td>
+                        <td>
+                            <a href="{{egg.htmlUrl}}">{{egg.htmlUrl}}</a>
+                        </td>
+                        <td>
+                            {{egg.stargazersCount}}
+                        </td>
+                        <td>
+                            {{egg.forksCount}}
+                        </td>
                     </tr>
-                </thead>
-                <tr>
-                    <td>
-                        <img src="https://gravatar.com/avatar/f0d91e5cf8ad1ce7972cc486baa20c42?d=https%3A%2F%2Fidenticons.github.com%2Ff3377e1ac5fdd9183c13129960faedd7.png&r=x">
-                    </td>
-                    <td>
-                        wrecking-slide
-                    </td>
-                    <td>
-                        Wrecking Slide – A jQuery slider.
-                    </td>
-                    <td>
-                        https://github.com/drublic/slider
-                    </td>
-                    <td>
-                        11
-                    </td>
-                    <td>
-                        2
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <img src="https://gravatar.com/avatar/5572003a2d29e47e0d8084ac35ba3a42?d=https%3A%2F%2Fidenticons.github.com%2Fb587da25f0be5b669a8bc5d582f4b165.png&r=x">
-                    </td>
-                    <td>
-                        wrecking-slide
-                    </td>
-                    <td>
-                        Wrecking Slide – A jQuery slider.
-                    </td>
-                    <td>
-                        https://github.com/drublic/slider
-                    </td>
-                    <td>
-                        11
-                    </td>
-                    <td>
-                        2
-                    </td>
-                </tr>
-            </table>
+                </table>
+
+                <ul class="pager">
+                    <li class="previous" ng-class="{disabled: currentPage <= 1}"><a href="" ng-click="onClickPagePrev()">&larr; Prev</a></li>
+                    <li class="next" ng-class="{disabled: currentPage >= totalPages}"><a href="" ng-click="onClickPageNext()">Next &rarr;</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
